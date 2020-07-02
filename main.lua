@@ -10,32 +10,30 @@ require 'Paddle'
 function love.load()
     
     math.randomseed(os.time())
-
+    
     love.graphics.setDefaultFilter('nearest', 'nearest')
     
     smallFont = love.graphics.newFont('font.ttf', 8)
     scoreFont = love.graphics.newFont('font.ttf', 32)
     victoryFont = love.graphics.newFont('font.ttf', 24)
-
+    
     sounds = {
         ['paddle_hit'] = love.audio.newSource('paddle_hit.ogg', 'static'),
         ['point_scored'] = love.audio.newSource('point_scored.ogg', 'static'),
         ['wall_hit'] = love.audio.newSource('wall_hit.ogg', 'static')
     }
-
+    
     palyer1Score = 0
     palyer2Score = 0 
-
-    servingPlayer = math.random(2) == 1 and 1 or 2
+    
     winningPlayer = 0
-
-    love.window.setTitle("Pong")
-
+    
     paddle1 = Paddle(5, 30, PADDLE_THICKNESS, PADDLE_HEIGHT)
     paddle2 = Paddle(VIRTUAL_WIDTH - 10, VIRTUAL_HEIGHT - 60 , PADDLE_THICKNESS ,PADDLE_HEIGHT)
     
     ball = Ball(VIRTUAL_WIDTH / 2 - 2, VIRTUAL_HEIGHT / 2 - 2, BALL_SIZE , BALL_SIZE )
-
+    
+    servingPlayer = math.random(2) == 1 and 1 or 2
     if servingPlayer == 1 then
         ball.dx = BALL_SPEED    
     else
@@ -49,6 +47,7 @@ function love.load()
         vsync = true,
         resizable = true
     })
+    love.window.setTitle("Pong")
     
 end
 
@@ -56,12 +55,12 @@ function love.resize(width, height)
     push:resize(width, height) 
 end
 
-
 function love.update(dt)
    
     if gameState == 'serve' then
 
     elseif gameState == 'play' then
+        
         if ball:collides(paddle1) then
             -- deflect ball to the right
             ball.dx = -ball.dx * 1.03
@@ -125,7 +124,6 @@ function love.update(dt)
             ball.dy = -ball.dy
 
             sounds['wall_hit']:play()
-
         end
     
         if ball.y >= VIRTUAL_HEIGHT - BALL_SIZE then
@@ -153,12 +151,13 @@ function love.update(dt)
         paddle2.dy = 0
     end
     
+    
+    paddle1:update(dt)
+    paddle2:update(dt)
+    
     if gameState == 'play' then
         ball:update(dt)
     end
-
-    paddle1:update(dt)
-    paddle2:update(dt)
 
 end
 
@@ -175,10 +174,6 @@ function love.keypressed(key)
         elseif gameState == 'serve' then
             gameState = 'play'
         end
-        -- elseif gameState == 'play' then
-        --     gameState = 'start'
-        --     ball:reset()
-        -- end
     end
 end
 
