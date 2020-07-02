@@ -1,16 +1,4 @@
-WINDOW_WIDTH = 1280
-WINDOW_HEIGHT = 720
-
-VIRTUAL_WIDTH = 432
-VIRTUAL_HEIGHT = 243
-
-PADDLE_SPEED = 200
-PADDLE_HEIGHT = 40
-PADDLE_THICKNESS = 5
-
-BALL_SIZE = 5
-BALL_SPEED = 100
-
+require 'config'
 
 Class = require 'class'
 push = require 'push'
