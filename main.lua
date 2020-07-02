@@ -6,6 +6,7 @@ VIRTUAL_HEIGHT = 243
 
 PADDLE_SPEED = 200
 PADDLE_HEIGHT = 40
+PADDLE_THICKNESS = 5
 
 BALL_SIZE = 5
 BALL_SPEED = 100
@@ -42,8 +43,8 @@ function love.load()
 
     love.window.setTitle("Pong")
 
-    paddle1 = Paddle(5, 30, 5, PADDLE_HEIGHT)
-    paddle2 = Paddle(VIRTUAL_WIDTH - 10, VIRTUAL_HEIGHT - 60 , 5 ,PADDLE_HEIGHT)
+    paddle1 = Paddle(5, 30, PADDLE_THICKNESS, PADDLE_HEIGHT)
+    paddle2 = Paddle(VIRTUAL_WIDTH - 10, VIRTUAL_HEIGHT - 60 , PADDLE_THICKNESS ,PADDLE_HEIGHT)
     
     ball = Ball(VIRTUAL_WIDTH / 2 - 2, VIRTUAL_HEIGHT / 2 - 2, BALL_SIZE , BALL_SIZE )
 
@@ -76,6 +77,7 @@ function love.update(dt)
         if ball:collides(paddle1) then
             -- deflect ball to the right
             ball.dx = -ball.dx * 1.03
+            ball.x = paddle1.x + PADDLE_THICKNESS
 
             sounds['paddle_hit']:play()
             
@@ -89,6 +91,7 @@ function love.update(dt)
         if ball:collides(paddle2) then
             -- deflect ball to the left
             ball.dx = -ball.dx * 1.03
+            ball.x = paddle2.x - BALL_SIZE
 
             sounds['paddle_hit']:play()
     
