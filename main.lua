@@ -18,9 +18,9 @@ function love.load()
     victoryFont = love.graphics.newFont('font.ttf', 24)
     
     sounds = {
-        ['paddle_hit'] = love.audio.newSource('paddle_hit.ogg', 'static'),
-        ['point_scored'] = love.audio.newSource('point_scored.ogg', 'static'),
-        ['wall_hit'] = love.audio.newSource('wall_hit.ogg', 'static')
+        ['paddle_hit'] = love.audio.newSource('sounds/paddle_hit.ogg', 'static'),
+        ['point_scored'] = love.audio.newSource('sounds/point_scored.ogg', 'static'),
+        ['wall_hit'] = love.audio.newSource('sounds/wall_hit.ogg', 'static')
     }
     
     palyer1Score = 0
