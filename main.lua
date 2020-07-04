@@ -1,7 +1,7 @@
 require 'config'
 
-Class = require 'class'
-push = require 'push'
+Class = require 'libraries/class'
+push = require 'libraries/push'
 
 require 'Ball'
 require 'Paddle'
