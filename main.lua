@@ -9,8 +9,6 @@ require 'Paddle'
 
 function love.load()
     
-    math.randomseed(os.time())
-    
     love.graphics.setDefaultFilter('nearest', 'nearest')
     
     smallFont = love.graphics.newFont('font.ttf', 8)
@@ -33,6 +31,7 @@ function love.load()
     
     ball = Ball(VIRTUAL_WIDTH / 2 - 2, VIRTUAL_HEIGHT / 2 - 2, BALL_SIZE , BALL_SIZE )
     
+    math.randomseed(os.time())
     servingPlayer = math.random(2) == 1 and 1 or 2
     if servingPlayer == 1 then
         ball.dx = BALL_SPEED    
@@ -203,8 +202,11 @@ function love.draw()
     paddle2:render()
 
     displayScore()
-    displayFPS()
     
+    if SHOW_FPS then
+        displayFPS()
+    end
+
     push:apply('end')
 end
 
